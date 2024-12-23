@@ -1,5 +1,5 @@
-name: Custom Vanilla Desktop # Replace this name with your image name
-id: custom # Replace this ID with your image ID
+name: vos-ci-ss # Replace this name with your image name
+id: vos-ci-ss # Replace this ID with your image ID
 stages:
 - id: build
   base: ghcr.io/vanilla-os/desktop:main # Optionally, Replace this image URL with a different one i.e. nvidia:main, etc
@@ -19,6 +19,8 @@ stages:
     type: shell
     commands:
     - lpkg --unlock
+    - curl -fsSL https://pkgs.tailscale.com/stable/debian/sid.noarmor.gpg | tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
+    - curl -fsSL https://pkgs.tailscale.com/stable/debian/sid.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
     - apt-get update
 
   # Put your custom actions below this comment
@@ -27,7 +29,7 @@ stages:
     type: apt
     source:
       packages:
-      - vim
+      - tailscale
 
   - name: example-commands # Sample module demonstrating the Shell module with custom commands
     type: shell
