@@ -22,8 +22,8 @@ stages:
     - apt-get update
 
   # Put your custom actions below this comment
-
-   name: install-tailscale # Sample module demonstrating the Shell module with custom commands
+  
+  - name: install-tailscale # Sample module demonstrating the Shell module with custom commands
     type: shell
     commands:
     - mkdir -p --mode=0755 /usr/share/keyrings
